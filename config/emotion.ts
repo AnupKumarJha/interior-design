@@ -1,4 +1,7 @@
-import styled, { CreateStyled } from '@emotion/styled'
-import theme from '../styles/theme'
+import styled from '@emotion/styled'
+import { Theme } from '@chakra-ui/react'
 
-export default styled as CreateStyled<typeof theme>
+// Create a typed version of styled for our theme
+const styledWithTheme = styled as typeof styled
+
+export default styledWithTheme
