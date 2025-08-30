@@ -35,7 +35,7 @@ const Introduction: React.FC = () => {
           collaborate with you to create a space that is not only beautiful and
           functional but also tells your story.
         </Text>
-        <Button mt="8">Learn More</Button>
+        <Button content="Learn More" />
       </Flex>
       <Flex
         backgroundImage="url(/about-us-bg.png)"

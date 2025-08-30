@@ -51,7 +51,7 @@ const About: React.FC = () => {
         <Text fontSize="lg" mb="8" fontWeight="bold">
           Contact Rishu: 7001837559
         </Text>
-        <Button>Learn More</Button>
+        <Button content="Learn More" />
       </Flex>
     </Grid>
   )

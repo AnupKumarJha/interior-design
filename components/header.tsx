@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           We create personalized, beautiful, and functional living spaces that
           reflect your unique personality.
         </Text>
-        <Button>Get in Touch</Button>
+        <Button content="Get in Touch" />
       </Flex>
     </Grid>
   )
