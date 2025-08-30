@@ -1,6 +1,8 @@
 import React from 'react'
-
-import { Flex, Text, Heading, Grid, Image, Box } from '@chakra-ui/core'
+import Button from './button'
+import { Flex, Text, Heading, Grid, Image, Box } from '@chakra-ui/react'
+import director1 from '../public/directors/1.png'
+import director2 from '../public/directors/2.png'
 
 const CreativeDirector: React.FC = () => {
   return (

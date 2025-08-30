@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, Button, Stack } from '@chakra-ui/core'
+import { Box, Flex, Link, Button, Stack } from '@chakra-ui/react'
 import Logo from './logo'
 
 interface MenuItem {
@@ -19,7 +19,7 @@ const MenuItems: React.FC<MenuItem> = ({ children, link }) => (
   </Link>
 )
 
-const Nav = props => {
+const Nav: React.FC = () => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
 
@@ -38,7 +38,6 @@ const Nav = props => {
       bg="rgba(255,255,255,.8)"
       color="black"
       textTransform="uppercase"
-      {...props}
     >
       <Flex align="center" mr={5}>
         <Logo />
@@ -75,9 +74,9 @@ const Nav = props => {
         <MenuItems>Blog</MenuItems>
         <MenuItems>Contact</MenuItems>
         <Stack spacing={0} direction="row" align="center" marginLeft={20} >
-          <Button variantColor="yellow">Create an account</Button>
-          <Button variantColor="yellow" variant="ghost">
-            sign in
+          <Button colorScheme="yellow">Create an account</Button>
+          <Button colorScheme="yellow" variant="ghost">
+            Login
           </Button>
         </Stack>
        

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex, Grid, Heading } from '@chakra-ui/core'
+import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
+import Button from './button'
 
 const Header: React.FC = () => {
   return (
@@ -8,38 +9,37 @@ const Header: React.FC = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      height={['60vh', '60vh', '60vh', '70vh']}
+      height={['60vh', '60vh', '60vh', '80vh']}
       templateRows="1fr 1fr 1fr"
+      alignItems="center"
     >
       <Flex
         flexDirection="column"
-        gridRow="3 / 3"
+        gridRow="2 / 3"
         paddingX={['1.5em', '1.5em', '1.5em', '15%']}
       >
         <Heading
-          as="h2"
-          fontSize={['4xl', '5xl', '6xl', '6xl', '6xl']}
+          as="h1"
+          fontWeight="black"
+          fontSize={['5xl', '5xl', '7xl', '7xl', '7xl']}
           color="white"
-          bg="orange.500"
           mb="3"
           width="fit-content"
-          paddingX={['4px', '12px', '12px', '16px', '24px']}
-          paddingY={['4px', '4px', '12px', '12px', '16px']}
+          textShadow="2px 2px 4px rgba(0,0,0,0.5)"
         >
-          Decoration Ideas
+          Your Space, Your Story.
         </Heading>
-        <Heading
-          as="h3"
+        <Text
+          color="white"
           fontSize={['lg', 'lg', '2xl', '2xl', '2xl']}
-          textTransform="uppercase"
-          color="orange.500"
-          bg="white"
-          width="fit-content"
-          paddingX={['24px', '24px', '30px', '30px', '30px']}
-          paddingY={['8px', '8px', '14px', '14px', '14px']}
+          width={['100%', '100%', '100%', '75%', '60%']}
+          mb="8"
+          textShadow="1px 1px 2px rgba(0,0,0,0.5)"
         >
-          Ideas & Inspirations
-        </Heading>
+          We create personalized, beautiful, and functional living spaces that
+          reflect your unique personality.
+        </Text>
+        <Button>Get in Touch</Button>
       </Flex>
     </Grid>
   )

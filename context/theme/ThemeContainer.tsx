@@ -1,11 +1,10 @@
 import React from 'react'
 import {
-  ThemeProvider as ChakraThemeProvider,
-  ColorModeProvider,
+  ThemeProvider,
   CSSReset
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming'
-import theme from '../../styles/theme'
+import { theme } from '../../styles'
 
 const ThemeContainer: React.FC = ({ children }) => {
   return (

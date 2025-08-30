@@ -1,15 +1,21 @@
 import React from 'react'
-import { Button as ChakraButton } from '@chakra-ui/core'
+import { Button as ChakraButton } from '@chakra-ui/react'
 
-const Button: React.FC = ({ children }) => {
+interface ButtonProps {
+  content: string
+}
+
+const Button: React.FC<ButtonProps> = ({ content }) => {
   return (
     <ChakraButton
-      variantColor="orange"
-      color="white"
+      fontWeight="bold"
       textTransform="uppercase"
+      colorScheme="orange"
+      size="lg"
+      letterSpacing="1px"
       width="fit-content"
     >
-      {children}
+      {content}
     </ChakraButton>
   )
 }
