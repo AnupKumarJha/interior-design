@@ -11,17 +11,19 @@ const WhatsAppButton: React.FC = () => {
       href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`}
       isExternal
       position="fixed"
-      bottom="30px"
+      top="50%"
       right="30px"
+      transform="translateY(-50%)"
       zIndex="1000"
     >
       <Box
         as={FaWhatsapp}
-        size="60px"
+        width="56px"
+        height="56px"
         color="white"
         bg="green.500"
         borderRadius="full"
-        p="12px"
+        p="14px"
         boxShadow="lg"
         transition="all 0.2s ease-in-out"
         _hover={{ transform: 'scale(1.1)', boxShadow: 'xl' }}

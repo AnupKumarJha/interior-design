@@ -170,9 +170,11 @@ Keep responses concise (2-3 sentences max) and always try to understand the clie
         aria-label="Open chat"
         icon={isOpen ? <CloseIcon /> : <ChatIcon />}
         position="fixed"
-        bottom="100px"
+        top="50%"
         right="30px"
-        size="lg"
+        transform="translateY(70px)"
+        width="56px"
+        height="56px"
         colorScheme="blue"
         borderRadius="full"
         boxShadow="lg"
@@ -183,7 +185,7 @@ Keep responses concise (2-3 sentences max) and always try to understand the clie
           }
           onToggle();
         }}
-        _hover={{ transform: 'scale(1.1)' }}
+        _hover={{ transform: 'translateY(70px) scale(1.1)' }}
         transition="all 0.2s ease-in-out"
       />
 
@@ -191,8 +193,9 @@ Keep responses concise (2-3 sentences max) and always try to understand the clie
       <Collapse in={isOpen}>
         <Box
           position="fixed"
-          bottom="170px"
+          top="50%"
           right="30px"
+          transform="translateY(-250px)"
           width="350px"
           height="500px"
           bg="white"
