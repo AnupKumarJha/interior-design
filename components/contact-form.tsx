@@ -12,32 +12,48 @@ import {
   useToast,
   Alert,
   AlertIcon,
+  Checkbox,
+  InputGroup,
+  InputLeftElement,
+  Select,
 } from '@chakra-ui/react';
+import { PhoneIcon } from '@chakra-ui/icons';
 import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     email: '',
-    message: ''
+    message: '',
+    whatsappUpdates: false
   });
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData(prev => ({
+        ...prev,
+        [name]: checked
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.phone || !formData.message) {
       toast({
-        title: 'Please fill in all fields',
+        title: 'Please fill in required fields',
+        description: 'Name, Phone, and Message are required.',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -55,11 +71,13 @@ const ContactForm: React.FC = () => {
 
       const templateParams = {
         from_name: formData.name,
-        from_email: formData.email,
+        from_phone: formData.phone,
+        from_email: formData.email || 'No email provided',
         message: formData.message,
+        whatsapp_updates: formData.whatsappUpdates ? 'Yes' : 'No',
         to_name: 'Anup Jha',
         to_email: 'anupjha099@gmail.com',
-        reply_to: formData.email
+        reply_to: formData.email || formData.phone
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -73,7 +91,7 @@ const ContactForm: React.FC = () => {
       });
 
       // Reset form
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', phone: '', email: '', message: '', whatsappUpdates: false });
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
@@ -102,64 +120,136 @@ const ContactForm: React.FC = () => {
         fontWeight="black"
         mb="4"
       >
-        Get in Touch
+        Designs for Every Budget
       </Heading>
       <Text fontSize="xl" mb="16" maxW="560px" textAlign="center">
         Have a project in mind? We'd love to hear from you.
       </Text>
-      
-      <Alert status="info" mb="6" maxW="600px">
-        <AlertIcon />
-        <Box>
-          <Text fontSize="sm">
-            <strong>Note:</strong> To complete the email setup, you'll need to configure EmailJS with your account details. 
-            For now, the form will show a demo of the functionality.
-          </Text>
-        </Box>
-      </Alert>
 
       <Box width="100%" maxW="600px">
         <form onSubmit={handleSubmit}>
-          <FormControl id="name" mb="4" isRequired>
-            <FormLabel>Name</FormLabel>
+          <FormControl id="name" mb="6" isRequired>
             <Input 
               type="text" 
               name="name"
-              placeholder="Your Name" 
+              placeholder="Name" 
               value={formData.name}
               onChange={handleInputChange}
+              size="lg"
+              borderRadius="md"
+              bg="white"
+              border="2px solid"
+              borderColor="gray.200"
+              _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
             />
           </FormControl>
-          <FormControl id="email" mb="4" isRequired>
-            <FormLabel>Email</FormLabel>
+
+          <FormControl id="phone" mb="6" isRequired>
+            <InputGroup size="lg">
+              <InputLeftElement>
+                <Box display="flex" alignItems="center" pl="2">
+                  <Box 
+                    width="20px" 
+                    height="15px" 
+                    bg="linear-gradient(to bottom, #ff9933 33%, #ffffff 33%, #ffffff 66%, #138808 66%)"
+                    mr="2"
+                    borderRadius="2px"
+                  />
+                  <Text fontSize="sm">+91</Text>
+                </Box>
+              </InputLeftElement>
+              <Input 
+                type="tel" 
+                name="phone"
+                placeholder="Phone number" 
+                value={formData.phone}
+                onChange={handleInputChange}
+                pl="20"
+                borderRadius="md"
+                bg="white"
+                border="2px solid"
+                borderColor="gray.200"
+                _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
+              />
+            </InputGroup>
+          </FormControl>
+
+          <FormControl id="email" mb="6">
             <Input 
               type="email" 
               name="email"
-              placeholder="Your Email" 
+              placeholder="Email (Optional)" 
               value={formData.email}
               onChange={handleInputChange}
+              size="lg"
+              borderRadius="md"
+              bg="white"
+              border="2px solid"
+              borderColor="gray.200"
+              _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
             />
           </FormControl>
-          <FormControl id="message" mb="4" isRequired>
-            <FormLabel>Message</FormLabel>
+
+          <FormControl id="message" mb="6" isRequired>
             <Textarea 
               name="message"
               placeholder="Tell us about your project" 
               value={formData.message}
               onChange={handleInputChange}
-              rows={5}
+              rows={4}
+              size="lg"
+              borderRadius="md"
+              bg="white"
+              border="2px solid"
+              borderColor="gray.200"
+              _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
             />
           </FormControl>
+
+          <FormControl id="whatsapp" mb="8">
+            <Checkbox 
+              name="whatsappUpdates"
+              isChecked={formData.whatsappUpdates}
+              onChange={handleInputChange}
+              colorScheme="red"
+              size="lg"
+            >
+              <Text fontSize="lg">Send me updates on WhatsApp</Text>
+            </Checkbox>
+          </FormControl>
+
           <Button 
             type="submit" 
-            colorScheme="orange" 
+            bg="linear-gradient(135deg, #ff6b6b, #ee5a52)"
+            color="white"
             size="lg" 
             width="100%"
+            height="60px"
+            fontSize="xl"
+            fontWeight="bold"
+            borderRadius="full"
             isLoading={isLoading}
             loadingText="Sending..."
+            _hover={{ 
+              bg: "linear-gradient(135deg, #ff5252, #e53e3e)",
+              transform: "translateY(-2px)",
+              boxShadow: "lg"
+            }}
+            transition="all 0.2s ease-in-out"
           >
-            Send Message
+            NEXT
           </Button>
+
+          <Text fontSize="sm" textAlign="center" mt="6" color="gray.600">
+            By submitting this form, you agree to the{' '}
+            <Text as="span" color="red.400" textDecoration="underline" cursor="pointer">
+              privacy policy
+            </Text>
+            {' & '}
+            <Text as="span" color="red.400" textDecoration="underline" cursor="pointer">
+              terms and conditions
+            </Text>
+          </Text>
         </form>
       </Box>
     </Flex>
