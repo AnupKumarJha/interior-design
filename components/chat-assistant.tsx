@@ -48,6 +48,16 @@ const ChatAssistant: React.FC = () => {
     }, 500);
   };
 
+  const addBotMessage = useCallback((text: string) => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      sender: 'bot',
+      timestamp: new Date(),
+    };
+    setMessages(prev => [...prev, newMessage]);
+  }, []);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages.length]);
@@ -60,16 +70,6 @@ const ChatAssistant: React.FC = () => {
       }, 500);
     }
   }, [isOpen, messages.length, addBotMessage]);
-
-  const addBotMessage = useCallback((text: string) => {
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      text,
-      sender: 'bot',
-      timestamp: new Date(),
-    };
-    setMessages(prev => [...prev, newMessage]);
-  }, []);
 
   const addUserMessage = (text: string) => {
     const newMessage: Message = {

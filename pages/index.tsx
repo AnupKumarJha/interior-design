@@ -10,7 +10,7 @@ import Footer from '../components/footer'
 import OurProjects from '../components/our-projects'
 import { Divider } from '@chakra-ui/react'
 import ContactForm from '../components/contact-form'
- 
+
 const Home: React.FC = () => {
   return (
     <>
