@@ -1,15 +1,18 @@
 import React from 'react'
-import {
-  Flex,
-  Text,
-  Heading,
-  Grid,
-  Image,
-  Box
-} from '@chakra-ui/react'
+import { Flex, Heading, Text, Box } from '@chakra-ui/react'
 import Button from './button'
+import Carousel from './carousel'
 
-const OurProject: React.FC = () => {
+const OurProjects: React.FC = () => {
+  const projectImages = [
+    '/grid/1.png',
+    '/grid/2.png',
+    '/grid/3.png',
+    '/grid/4.png',
+    '/grid/5.png',
+    '/grid/6.png'
+  ];
+
   return (
     <Flex
       flexDirection="column"
@@ -29,34 +32,14 @@ const OurProject: React.FC = () => {
         A glimpse into our portfolio of bespoke designs and transformative
         spaces.
       </Text>
-      <Grid
-        templateColumns={['1fr', '1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
-        gap="8"
-        width="100%"
-      >
-        <ProjectCard image="/grid/1.png" />
-        <ProjectCard image="/grid/2.png" />
-        <ProjectCard image="/grid/3.png" />
-        <ProjectCard image="/grid/4.png" />
-        <ProjectCard image="/grid/5.png" />
-        <ProjectCard image="/grid/6.png" />
-      </Grid>
-      <Button mt="16">View All Projects</Button>
+      <Box width="100%">
+        <Carousel images={projectImages} />
+      </Box>
+      <Box mt="16">
+        <Button content='View All Projects' />
+      </Box>
     </Flex>
   )
 }
 
-const ProjectCard = ({ image }) => (
-  <Box
-    as="div"
-    overflow="hidden"
-    borderRadius="md"
-    boxShadow="lg"
-    transition="all 0.2s ease-in-out"
-    _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
-  >
-    <Image src={image} alt="Project" width="100%" height="100%" objectFit="cover" />
-  </Box>
-)
-
-export default OurProject
+export default OurProjects
