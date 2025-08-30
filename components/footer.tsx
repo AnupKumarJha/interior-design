@@ -68,12 +68,12 @@ const Footer: React.FC = () => {
           <Text color="orange.500" fontWeight="bold" fontSize="20px" mb="4">
             Contact Us
           </Text>
-          <Text mb="2">
+          <Link href="tel:7001837559" mb="2">
             <strong>Phone:</strong> 7001837559
-          </Text>
-          <Text>
+          </Link>
+          <Link href="mailto:info@namastedesignstudios.com">
             <strong>Email:</strong> info@namastedesignstudios.com
-          </Text>
+          </Link>
         </Flex>
       </Grid>
       <Divider />

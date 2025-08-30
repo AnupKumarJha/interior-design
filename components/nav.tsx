@@ -72,7 +72,7 @@ const Nav: React.FC = () => {
         <MenuItems>Services</MenuItems>
         <MenuItems>Gallery</MenuItems>
         <MenuItems>Blog</MenuItems>
-        <MenuItems>Contact</MenuItems>
+        <Link href="#contact" mt={{ base: 4, md: 0 }} mr={6} display="block" fontWeight="bold" _hover={{ color: 'orange.500' }}>Contact</Link>
         <Stack spacing={0} direction="row" align="center" marginLeft={20} >
           <Button colorScheme="yellow">Create an account</Button>
           <Button colorScheme="yellow" variant="ghost">

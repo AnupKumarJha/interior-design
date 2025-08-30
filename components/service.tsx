@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Flex, Heading, Text, Grid, Icon } from '@chakra-ui/react'
+import { FaHome, FaBriefcase, FaDesktop } from 'react-icons/fa'
 
 const Service: React.FC = () => {
   return (
@@ -25,17 +26,17 @@ const Service: React.FC = () => {
         gap="8"
       >
         <ServiceCard
-          icon="home"
+          icon={FaHome}
           title="Residential Design"
           description="From single rooms to full home renovations, we create beautiful and functional spaces for you to live in."
         />
         <ServiceCard
-          icon="business"
+          icon={FaBriefcase}
           title="Commercial Design"
           description="We design inspiring and productive office spaces, retail stores, and other commercial properties."
         />
         <ServiceCard
-          icon="email"
+          icon={FaDesktop}
           title="E-Design"
           description="Our virtual design services allow us to work with you remotely to create the space of your dreams."
         />
@@ -45,7 +46,7 @@ const Service: React.FC = () => {
 }
 
 interface ServiceCardProps {
-  icon: any
+  icon: React.ElementType
   title: string
   description: string
 }
@@ -64,8 +65,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       borderColor="gray.200"
       borderRadius="md"
       boxShadow="lg"
+      transition="all 0.2s ease-in-out"
+      _hover={{
+        transform: 'translateY(-10px)',
+        boxShadow: 'xl',
+      }}
     >
-      <Icon name={icon} size="48px" color="orange.500" mb="4" />
+      <Icon as={icon} fontSize="48px" color="orange.500" mb="4" />
       <Heading as="h3" fontSize="2xl" mb="4">
         {title}
       </Heading>
