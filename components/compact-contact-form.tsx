@@ -133,9 +133,6 @@ const CompactContactForm: React.FC = () => {
   return (
     <Box w="full">
       <Box textAlign="center" mb="6">
-        <Text fontSize="xs" color="purple.600" fontWeight="medium" mb="1">
-          1 / 2
-        </Text>
         <Heading
           as="h3"
           size="md"

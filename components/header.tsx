@@ -115,6 +115,8 @@ const Header: React.FC = () => {
             w={['full', 'full', 'auto']}
           >
             <Box
+              as="a"
+              href="#contact"
               bg="rgba(255,255,255,0.9)"
               backdropFilter="blur(10px)"
               borderRadius="xl"
@@ -130,29 +132,10 @@ const Header: React.FC = () => {
                 bg: 'white'
               }}
               border="1px solid rgba(255,255,255,0.2)"
+              textDecoration="none"
             >
               <Text fontWeight="bold" color="purple.700" fontSize={['md', 'md']}>
                 Get Free Consultation
-              </Text>
-            </Box>
-            
-            <Box
-              border="2px solid rgba(255,255,255,0.3)"
-              borderRadius="xl"
-              px={['6', '8']}
-              py="4"
-              cursor="pointer"
-              transition="all 0.3s ease"
-              textAlign="center"
-              minW={['auto', 'auto', '160px']}
-              _hover={{
-                bg: 'rgba(255,255,255,0.1)',
-                borderColor: 'rgba(255,255,255,0.5)',
-                transform: 'translateY(-2px)'
-              }}
-            >
-              <Text fontWeight="bold" color="white" fontSize={['md', 'md']}>
-                View Portfolio
               </Text>
             </Box>
           </Flex>
@@ -174,7 +157,7 @@ const Header: React.FC = () => {
               <Text fontSize="sm" color="gray.300">Happy Clients</Text>
             </VStack>
             <VStack spacing="1" align={['flex-start', 'center']}>
-              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">5★</Text>
+              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">4.8★</Text>
               <Text fontSize="sm" color="gray.300">Average Rating</Text>
             </VStack>
           </Flex>
