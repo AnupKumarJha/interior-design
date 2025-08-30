@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Grid, Heading, Text, Box, VStack, HStack } from '@chakra-ui/react'
 import Button from './button'
+import CompactContactForm from './compact-contact-form'
 
 const Header: React.FC = () => {
   return (
@@ -45,14 +46,17 @@ const Header: React.FC = () => {
 
       <Grid
         height={['70vh', '70vh', '80vh', '90vh']}
+        templateColumns={['1fr', '1fr', '1fr', '1fr 400px']}
         templateRows="1fr 1fr 1fr"
         alignItems="center"
         position="relative"
         zIndex="3"
+        paddingX={['1.5em', '1.5em', '1.5em', '15%']}
+        gap="8"
       >
         <VStack
           gridRow="2 / 3"
-          paddingX={['1.5em', '1.5em', '1.5em', '15%']}
+          gridColumn={['1', '1', '1', '1']}
           spacing="6"
           align="flex-start"
           maxW="900px"
@@ -175,6 +179,28 @@ const Header: React.FC = () => {
             </VStack>
           </Flex>
         </VStack>
+
+        {/* Contact Form on the right */}
+        <Box
+          gridRow={['4', '4', '4', '1 / 4']}
+          gridColumn={['1', '1', '1', '2']}
+          display={['none', 'none', 'none', 'block']}
+          position="relative"
+          zIndex="4"
+        >
+          <Box
+            bg="rgba(255,255,255,0.95)"
+            backdropFilter="blur(20px)"
+            borderRadius="2xl"
+            p="6"
+            boxShadow="0 20px 60px rgba(0,0,0,0.15)"
+            border="1px solid rgba(255,255,255,0.2)"
+            maxW="400px"
+            w="full"
+          >
+            <CompactContactForm />
+          </Box>
+        </Box>
       </Grid>
     </Box>
   )

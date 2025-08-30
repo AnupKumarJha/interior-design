@@ -20,7 +20,11 @@ import {
 import { PhoneIcon } from '@chakra-ui/icons';
 import emailjs from '@emailjs/browser';
 
-const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  isCompact?: boolean;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
