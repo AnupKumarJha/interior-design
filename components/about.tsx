@@ -14,6 +14,7 @@ const About: React.FC = () => {
       <Box gridColumn={['1 / 1', '1 / 1', '1 / 1', '1 / 4']}>
         <Image
           src="/about-us-bg.png"
+          alt="About Namaste Design Studios"
           display={['none', 'none', 'none', 'block', 'block']}
           width="100%"
           borderRadius="md"
@@ -45,14 +46,19 @@ const About: React.FC = () => {
         </Text>
         <Text fontSize="lg" mb="6">
           Our collaborative approach ensures that every project is a true
-          reflection of our client's personality and lifestyle. We are dedicated
+          reflection of our client&apos;s personality and lifestyle. We are dedicated
           to delivering exceptional design and a seamless experience from start
           to finish.
         </Text>
         <Text fontSize="lg" mb="8" fontWeight="bold">
           Contact Rishu: 7001837559
         </Text>
-        <Button content="Learn More" />
+        <Box
+          as="a"
+          href="#services"
+        >
+          <Button content="Learn More" />
+        </Box>
       </Flex>
     </Grid>
   )

@@ -50,7 +50,7 @@ const ChatAssistant: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages.length]);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {

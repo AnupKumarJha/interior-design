@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Heading, Text, Flex } from '@chakra-ui/react'
+import { Grid, Heading, Text, Flex, Box } from '@chakra-ui/react'
 import Button from './button'
 
 const Introduction: React.FC = () => {
@@ -35,7 +35,13 @@ const Introduction: React.FC = () => {
           collaborate with you to create a space that is not only beautiful and
           functional but also tells your story.
         </Text>
-        <Button content="Learn More" />
+        <Box
+          as="a"
+          href="#about"
+          mt="8"
+        >
+          <Button content="Learn More" />
+        </Box>
       </Flex>
       <Flex
         backgroundImage="url(/about-us-bg.png)"

@@ -154,7 +154,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
         Designs for Every Budget
       </Heading>
       <Text fontSize="xl" mb="16" maxW="560px" textAlign="center">
-        Have a project in mind? We'd love to hear from you.
+        Have a project in mind? We&apos;d love to hear from you.
       </Text>
 
       <Box width="100%" maxW="600px">
