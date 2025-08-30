@@ -26,8 +26,23 @@ const ContactForm: React.FC = () => {
     phone: '',
     email: '',
     message: '',
-    whatsappUpdates: false
+    whatsappUpdates: false,
+    countryCode: '+91'
   });
+  
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+
+  const countries = [
+    { name: 'India', code: '+91', flag: '🇮🇳' },
+    { name: 'Singapore', code: '+65', flag: '🇸🇬' },
+    { name: 'Afghanistan', code: '+93', flag: '🇦🇫' },
+    { name: 'Albania', code: '+355', flag: '🇦🇱' },
+    { name: 'Algeria', code: '+213', flag: '🇩🇿' },
+    { name: 'United States', code: '+1', flag: '🇺🇸' },
+    { name: 'United Kingdom', code: '+44', flag: '🇬🇧' },
+    { name: 'Canada', code: '+1', flag: '🇨🇦' },
+    { name: 'Australia', code: '+61', flag: '🇦🇺' }
+  ];
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
@@ -45,6 +60,18 @@ const ContactForm: React.FC = () => {
         [name]: value
       }));
     }
+  };
+
+  const handleCountrySelect = (country: { name: string; code: string; flag: string }) => {
+    setFormData(prev => ({
+      ...prev,
+      countryCode: country.code
+    }));
+    setShowCountryDropdown(false);
+  };
+
+  const getSelectedCountry = () => {
+    return countries.find(country => country.code === formData.countryCode) || countries[0];
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,13 +98,13 @@ const ContactForm: React.FC = () => {
 
       const templateParams = {
         from_name: formData.name,
-        from_phone: formData.phone,
+        from_phone: `${formData.countryCode} ${formData.phone}`,
         from_email: formData.email || 'No email provided',
         message: formData.message,
         whatsapp_updates: formData.whatsappUpdates ? 'Yes' : 'No',
         to_name: 'Anup Jha',
         to_email: 'anupjha099@gmail.com',
-        reply_to: formData.email || formData.phone
+        reply_to: formData.email || `${formData.countryCode}${formData.phone}`
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -91,7 +118,7 @@ const ContactForm: React.FC = () => {
       });
 
       // Reset form
-      setFormData({ name: '', phone: '', email: '', message: '', whatsappUpdates: false });
+      setFormData({ name: '', phone: '', email: '', message: '', whatsappUpdates: false, countryCode: '+91' });
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
@@ -145,33 +172,70 @@ const ContactForm: React.FC = () => {
           </FormControl>
 
           <FormControl id="phone" mb="6" isRequired>
-            <InputGroup size="lg">
-              <InputLeftElement>
-                <Box display="flex" alignItems="center" pl="2">
+            <Box position="relative">
+              <InputGroup size="lg">
+                <InputLeftElement width="auto" pl="3" pr="1">
                   <Box 
-                    width="20px" 
-                    height="15px" 
-                    bg="linear-gradient(to bottom, #ff9933 33%, #ffffff 33%, #ffffff 66%, #138808 66%)"
-                    mr="2"
-                    borderRadius="2px"
-                  />
-                  <Text fontSize="sm">+91</Text>
+                    display="flex" 
+                    alignItems="center" 
+                    cursor="pointer"
+                    onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                    _hover={{ bg: "gray.50" }}
+                    borderRadius="md"
+                    p="1"
+                  >
+                    <Text fontSize="lg" mr="1">{getSelectedCountry().flag}</Text>
+                    <Text fontSize="sm" color="gray.600">▼</Text>
+                  </Box>
+                </InputLeftElement>
+                <Input 
+                  type="tel" 
+                  name="phone"
+                  placeholder="Phone number" 
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  pl="16"
+                  borderRadius="md"
+                  bg="white"
+                  border="2px solid"
+                  borderColor="gray.200"
+                  _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
+                />
+              </InputGroup>
+              
+              {showCountryDropdown && (
+                <Box
+                  position="absolute"
+                  top="100%"
+                  left="0"
+                  right="0"
+                  bg="white"
+                  border="2px solid"
+                  borderColor="gray.200"
+                  borderRadius="md"
+                  boxShadow="lg"
+                  zIndex="1000"
+                  maxH="200px"
+                  overflowY="auto"
+                >
+                  {countries.map((country, index) => (
+                    <Box
+                      key={index}
+                      p="3"
+                      cursor="pointer"
+                      _hover={{ bg: "gray.50" }}
+                      onClick={() => handleCountrySelect(country)}
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <Text fontSize="lg" mr="3">{country.flag}</Text>
+                      <Text fontSize="sm" flex="1">{country.name}</Text>
+                      <Text fontSize="sm" color="gray.600">{country.code}</Text>
+                    </Box>
+                  ))}
                 </Box>
-              </InputLeftElement>
-              <Input 
-                type="tel" 
-                name="phone"
-                placeholder="Phone number" 
-                value={formData.phone}
-                onChange={handleInputChange}
-                pl="20"
-                borderRadius="md"
-                bg="white"
-                border="2px solid"
-                borderColor="gray.200"
-                _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
-              />
-            </InputGroup>
+              )}
+            </Box>
           </FormControl>
 
           <FormControl id="email" mb="6">
