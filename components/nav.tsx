@@ -9,11 +9,11 @@ interface MenuItem {
 const MenuItems: React.FC<MenuItem> = ({ children, link }) => (
   <Link
     href={link}
-    mt={[4, 4, 0, 0]}
     mr={'36px'}
     display="block"
     fontWeight="medium"
     fontSize="md"
+    _hover={{ color: 'purple.600' }}
   >
     {children}
   </Link>
@@ -34,10 +34,12 @@ const Nav: React.FC = () => {
       justify="space-between"
       wrap="wrap"
       paddingX={['1.5em', '1.5em', '1.5em', '15%']}
-      paddingY="1.5em"
-      bg="rgba(255,255,255,.8)"
+      paddingY="1.2em"
+      bg="rgba(255,255,255,.95)"
+      backdropFilter="blur(10px)"
       color="black"
       textTransform="uppercase"
+      boxShadow="0 2px 20px rgba(0,0,0,0.1)"
     >
       <Flex align="center" mr={5}>
         <Logo />
@@ -55,32 +57,36 @@ const Nav: React.FC = () => {
         </svg>
       </Box>
 
-      <Box
+      <Flex
         display={[
-          show ? 'block' : 'none',
-          show ? 'block' : 'none',
+          show ? 'flex' : 'none',
+          show ? 'flex' : 'none',
           'flex',
           'flex'
         ]}
         width={['full', 'full', 'auto', 'auto']}
-        marginTop={['20px', '20px', 'auto', 'auto']}
+        marginTop={['20px', '20px', '0', '0']}
         textAlign="center"
         alignItems="center"
+        direction={['column', 'column', 'row', 'row']}
+        gap={['2', '2', '0', '0']}
       >
-        <MenuItems>Home</MenuItems>
-        <MenuItems>About</MenuItems>
-        <MenuItems>Services</MenuItems>
-        <MenuItems>Gallery</MenuItems>
-        <MenuItems>Blog</MenuItems>
-        <Link href="#contact" mt={{ base: 4, md: 0 }} mr={6} display="block" fontWeight="bold" _hover={{ color: 'orange.500' }}>Contact</Link>
-        <Stack spacing={0} direction="row" align="center" marginLeft={20} >
-          <Button colorScheme="yellow">Create an account</Button>
-          <Button colorScheme="yellow" variant="ghost">
-            Login
-          </Button>
-        </Stack>
-       
-      </Box>
+        <MenuItems link="#home">Home</MenuItems>
+        <MenuItems link="#about">About</MenuItems>
+        <MenuItems link="#services">Services</MenuItems>
+        <MenuItems link="#gallery">Gallery</MenuItems>
+        <MenuItems link="#blog">Blog</MenuItems>
+        <Link 
+          href="#contact" 
+          mr={['0', '0', '6', '6']} 
+          display="block" 
+          fontWeight="medium" 
+          _hover={{ color: 'purple.600' }}
+          mt={['2', '2', '0', '0']}
+        >
+          Contact
+        </Link>
+      </Flex>
     </Flex>
   )
 }

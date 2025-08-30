@@ -5,6 +5,7 @@ import Button from './button'
 const About: React.FC = () => {
   return (
     <Grid
+      id="about"
       templateColumns={['1fr', '1fr', '1fr', 'repeat(6, 1fr)']}
       marginY="24"
       alignItems="center"

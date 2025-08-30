@@ -15,6 +15,7 @@ const OurProjects: React.FC = () => {
 
   return (
     <Flex
+      id="gallery"
       flexDirection="column"
       alignItems="center"
       mt="24"

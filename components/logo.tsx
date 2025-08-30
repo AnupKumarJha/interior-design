@@ -1,19 +1,21 @@
 import React from 'react'
-
-import { Heading, Text } from '@chakra-ui/react'
+import { Heading, Text, Flex, Image } from '@chakra-ui/react'
 
 const Logo: React.FC = () => {
   return (
-    <>
-      <Heading as="h1" size="lg" color="orange.500" textTransform="uppercase">
-        <Text display="inline" fontWeight="extrabold">
-          Interior
-        </Text>{' '}
-        <Text display="inline" fontWeight="medium">
-          Design
-        </Text>
+    <Flex align="center">
+      <Image 
+        src="/icon/image.png" 
+        alt="Namaste Design Studio Logo" 
+        height="50px" 
+        width="auto"
+        mr="3" 
+      />
+      <Heading as="h1" size="lg" fontWeight="bold">
+        <Text as="span" color="purple.600">Namaste</Text>{' '}
+        <Text as="span" color="gray.700">Design Studio</Text>
       </Heading>
-    </>
+    </Flex>
   )
 }
 
