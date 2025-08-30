@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Box,
   Flex,
@@ -59,9 +59,9 @@ const ChatAssistant: React.FC = () => {
         addBotMessage("Hello! I'm your AI interior design assistant from Namaste Design Studios. I'm here to help you create your dream space. What kind of project are you considering?");
       }, 500);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length, addBotMessage]);
 
-  const addBotMessage = (text: string) => {
+  const addBotMessage = useCallback((text: string) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       text,
@@ -69,7 +69,7 @@ const ChatAssistant: React.FC = () => {
       timestamp: new Date(),
     };
     setMessages(prev => [...prev, newMessage]);
-  };
+  }, []);
 
   const addUserMessage = (text: string) => {
     const newMessage: Message = {
