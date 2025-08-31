@@ -3,6 +3,7 @@ import theme from '../styles/theme'
 import WhatsAppButton from '../components/whatsapp-button'
 import ChatAssistant from '../components/chat-assistant'
 import { useEffect } from 'react'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
