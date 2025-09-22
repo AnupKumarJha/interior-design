@@ -14,7 +14,7 @@ const About: React.FC = () => {
       <Box gridColumn={['1 / 1', '1 / 1', '1 / 1', '1 / 4']}>
         <Image
           src="/about-us-bg.png"
-          alt="About Namaste Design Studios"
+          alt="About NamasteDesignStudios"
           display={['none', 'none', 'none', 'block', 'block']}
           width="100%"
           borderRadius="md"
@@ -38,10 +38,10 @@ const About: React.FC = () => {
           About Us
         </Heading>
         <Text fontSize="xl" mb="6">
-          Namaste Design Studios is led by our passionate founder,{' '}
-          <strong>Rishu Sandilya</strong>. With a keen eye for detail and a
+          NamasteDesignStudios is led by our passionate founder,{' '}
+          <strong>Priye</strong>. With a keen eye for detail and a
           commitment to creating spaces that are both beautiful and functional,
-          Rishu and her team work closely with each client to bring their vision
+          Priye and the team work closely with each client to bring their vision
           to life.
         </Text>
         <Text fontSize="lg" mb="6">
@@ -51,7 +51,7 @@ const About: React.FC = () => {
           to finish.
         </Text>
         <Text fontSize="lg" mb="8" fontWeight="bold">
-          Contact Rishu: 7001837559
+          Contact Priye: 9972555787
         </Text>
         <Box
           as="a"

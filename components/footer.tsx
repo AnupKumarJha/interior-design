@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         <Flex flexDirection="column" alignItems="flex-start">
           <Logo />
           <Text fontSize="md" mt="4" textAlign="left" lineHeight="22px">
-            Creating beautiful and functional spaces that tell your story.
+            Creating beautiful and functional spaces that feel uniquely yours.
           </Text>
           <Flex
             flexDirection="row"
@@ -68,8 +68,8 @@ const Footer: React.FC = () => {
           <Text color="orange.500" fontWeight="bold" fontSize="20px" mb="4">
             Contact Us
           </Text>
-          <Link href="tel:7001837559" mb="2">
-            <strong>Phone:</strong> 7001837559
+          <Link href="tel:9972555787" mb="2">
+            <strong>Phone:</strong> 9972555787
           </Link>
           <Link href="mailto:info@namastedesignstudios.com">
             <strong>Email:</strong> info@namastedesignstudios.com
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
       </Grid>
       <Divider />
       <Text textAlign="center" py="8">
-        © {new Date().getFullYear()} Namaste Design Studios. All Rights Reserved.
+        © {new Date().getFullYear()} NamasteDesignStudios. All Rights Reserved.
       </Text>
     </Box>
   )

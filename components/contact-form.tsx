@@ -31,7 +31,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
     email: '',
     message: '',
     whatsappUpdates: false,
-    countryCode: '+91'
+    countryCode: '+91',
+    serviceType: '',
+    budgetRange: '',
+    timeline: '',
+    city: ''
   });
   
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
@@ -50,7 +54,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
@@ -108,7 +112,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
         whatsapp_updates: formData.whatsappUpdates ? 'Yes' : 'No',
         to_name: 'Anup Jha',
         to_email: 'anupjha099@gmail.com',
-        reply_to: formData.email || `${formData.countryCode}${formData.phone}`
+        reply_to: formData.email || `${formData.countryCode}${formData.phone}`,
+        service_type: formData.serviceType || 'Not specified',
+        budget_range: formData.budgetRange || 'Not specified',
+        timeline: formData.timeline || 'Not specified',
+        city: formData.city || 'Not specified',
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -122,7 +130,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
       });
 
       // Reset form
-      setFormData({ name: '', phone: '', email: '', message: '', whatsappUpdates: false, countryCode: '+91' });
+      setFormData({ name: '', phone: '', email: '', message: '', whatsappUpdates: false, countryCode: '+91', serviceType: '', budgetRange: '', timeline: '', city: '' });
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
@@ -159,6 +167,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
 
       <Box width="100%" maxW="600px">
         <form onSubmit={handleSubmit}>
+          <FormControl id="serviceType" mb="6">
+            <Select name="serviceType" placeholder="Service type" value={formData.serviceType} onChange={handleInputChange} size="lg" borderRadius="md" bg="white" border="2px solid" borderColor="gray.200" _focus={{ borderColor: 'orange.400', boxShadow: '0 0 0 1px orange.400' }}>
+              <option>Residential — Full Home</option>
+              <option>Residential — Room Makeover</option>
+              <option>Kitchen</option>
+              <option>Commercial</option>
+              <option>E‑Design / Consultation</option>
+            </Select>
+          </FormControl>
+
           <FormControl id="name" mb="6" isRequired>
             <Input 
               type="text" 
@@ -204,42 +222,42 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
                   border="2px solid"
                   borderColor="gray.200"
                   _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
-                />
-              </InputGroup>
-              
-              {showCountryDropdown && (
-                <Box
-                  position="absolute"
-                  top="100%"
-                  left="0"
-                  right="0"
-                  bg="white"
-                  border="2px solid"
-                  borderColor="gray.200"
-                  borderRadius="md"
-                  boxShadow="lg"
-                  zIndex="1000"
-                  maxH="200px"
-                  overflowY="auto"
-                >
-                  {countries.map((country, index) => (
-                    <Box
-                      key={index}
-                      p="3"
-                      cursor="pointer"
-                      _hover={{ bg: "gray.50" }}
-                      onClick={() => handleCountrySelect(country)}
-                      display="flex"
-                      alignItems="center"
-                    >
-                      <Text fontSize="lg" mr="3">{country.flag}</Text>
-                      <Text fontSize="sm" flex="1">{country.name}</Text>
-                      <Text fontSize="sm" color="gray.600">{country.code}</Text>
-                    </Box>
-                  ))}
-                </Box>
-              )}
-            </Box>
+              />
+            </InputGroup>
+            
+            {showCountryDropdown && (
+              <Box
+                position="absolute"
+                top="100%"
+                left="0"
+                right="0"
+                bg="white"
+                border="2px solid"
+                borderColor="gray.200"
+                borderRadius="md"
+                boxShadow="lg"
+                zIndex="1000"
+                maxH="200px"
+                overflowY="auto"
+              >
+                {countries.map((country, index) => (
+                  <Box
+                    key={index}
+                    p="3"
+                    cursor="pointer"
+                    _hover={{ bg: "gray.50" }}
+                    onClick={() => handleCountrySelect(country)}
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <Text fontSize="lg" mr="3">{country.flag}</Text>
+                    <Text fontSize="sm" flex="1">{country.name}</Text>
+                    <Text fontSize="sm" color="gray.600">{country.code}</Text>
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </Box>
           </FormControl>
 
           <FormControl id="email" mb="6">
@@ -256,6 +274,41 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
               borderColor="gray.200"
               _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
             />
+          </FormControl>
+
+          <FormControl id="city" mb="6">
+            <Input 
+              type="text" 
+              name="city"
+              placeholder="City / Location" 
+              value={formData.city}
+              onChange={handleInputChange}
+              size="lg"
+              borderRadius="md"
+              bg="white"
+              border="2px solid"
+              borderColor="gray.200"
+              _focus={{ borderColor: "orange.400", boxShadow: "0 0 0 1px orange.400" }}
+            />
+          </FormControl>
+
+          <FormControl id="budgetRange" mb="6">
+            <Select name="budgetRange" placeholder="Budget range" value={formData.budgetRange} onChange={handleInputChange} size="lg" borderRadius="md" bg="white" border="2px solid" borderColor="gray.200" _focus={{ borderColor: 'orange.400', boxShadow: '0 0 0 1px orange.400' }}>
+              <option>Under ₹2L</option>
+              <option>₹2L – ₹5L</option>
+              <option>₹5L – ₹10L</option>
+              <option>₹10L – ₹20L</option>
+              <option>₹20L+</option>
+            </Select>
+          </FormControl>
+
+          <FormControl id="timeline" mb="6">
+            <Select name="timeline" placeholder="Timeline" value={formData.timeline} onChange={handleInputChange} size="lg" borderRadius="md" bg="white" border="2px solid" borderColor="gray.200" _focus={{ borderColor: 'orange.400', boxShadow: '0 0 0 1px orange.400' }}>
+              <option>ASAP (0–1 month)</option>
+              <option>1–3 months</option>
+              <option>3–6 months</option>
+              <option>Just exploring</option>
+            </Select>
           </FormControl>
 
           <FormControl id="message" mb="6" isRequired>

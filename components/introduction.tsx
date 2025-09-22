@@ -23,14 +23,14 @@ const Introduction: React.FC = () => {
           fontSize={['4xl', '4xl', '5xl', '5xl', '5xl']}
           textAlign={['center', 'center', 'center', 'left']}
         >
-          Welcome to Namaste Design Studios
+          Welcome to NamasteDesignStudios
         </Heading>
         <Text
           mt="8"
           fontSize="xl"
           textAlign={['center', 'center', 'center', 'left']}
         >
-          At Namaste Design Studios, we believe that your home should be a
+          At NamasteDesignStudios, we believe that your home should be a
           reflection of your unique personality and lifestyle. Our mission is to
           collaborate with you to create a space that is not only beautiful and
           functional but also tells your story.

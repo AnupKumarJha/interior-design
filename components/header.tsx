@@ -85,14 +85,14 @@ const Header: React.FC = () => {
             lineHeight="shorter"
             textShadow="2px 2px 4px rgba(0,0,0,0.3)"
           >
-            Your Space, Your{' '}
+            Residential Interiors that{' '}
             <Text 
               as="span" 
               bgGradient="linear(to-r, orange.300, yellow.300, orange.400)"
               bgClip="text"
               fontWeight="black"
             >
-              Story
+              Feel Like You
             </Text>
           </Heading>
 
@@ -103,8 +103,9 @@ const Header: React.FC = () => {
             lineHeight="tall"
             textShadow="1px 1px 2px rgba(0,0,0,0.5)"
           >
-            We create personalized, beautiful, and functional living spaces that
-            reflect your unique personality and enhance your lifestyle.
+            We design and deliver warm, modern homes end‑to‑end — from concept to
+            turnkey execution in 6–10 weeks. Thoughtful layouts, curated
+            materials, and stress‑free project management.
           </Text>
 
           <Flex 
@@ -135,7 +136,29 @@ const Header: React.FC = () => {
               textDecoration="none"
             >
               <Text fontWeight="bold" color="purple.700" fontSize={['md', 'md']}>
-                Get Free Consultation
+                Get a Free Design Consultation
+              </Text>
+            </Box>
+            <Box
+              as="a"
+              href="tel:9972555787"
+              border="1px solid rgba(255,255,255,0.4)"
+              borderRadius="xl"
+              px={['6', '8']}
+              py="4"
+              cursor="pointer"
+              transition="all 0.3s ease"
+              textAlign="center"
+              minW={['auto', 'auto', '200px']}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+              }}
+              color="white"
+              textDecoration="none"
+            >
+              <Text fontWeight="bold" fontSize={['md', 'md']}>
+                Call: 9972555787
               </Text>
             </Box>
           </Flex>
@@ -149,15 +172,15 @@ const Header: React.FC = () => {
             w="full"
           >
             <VStack spacing="1" align={['flex-start', 'center']}>
-              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">500+</Text>
+              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">120+</Text>
               <Text fontSize="sm" color="gray.300">Projects Completed</Text>
             </VStack>
             <VStack spacing="1" align={['flex-start', 'center']}>
-              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">50+</Text>
+              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">75+</Text>
               <Text fontSize="sm" color="gray.300">Happy Clients</Text>
             </VStack>
             <VStack spacing="1" align={['flex-start', 'center']}>
-              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">4.8★</Text>
+              <Text fontSize={['xl', '2xl']} fontWeight="bold" color="white">4.9★</Text>
               <Text fontSize="sm" color="gray.300">Average Rating</Text>
             </VStack>
           </Flex>

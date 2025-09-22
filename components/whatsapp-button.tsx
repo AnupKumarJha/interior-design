@@ -3,7 +3,7 @@ import { Box, Link } from '@chakra-ui/react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton: React.FC = () => {
-  const phoneNumber = '7001837559';
+  const phoneNumber = '9972555787';
   const message = "Hello! I'm interested in your interior design services.";
   
   return (

@@ -1,24 +1,31 @@
 import React from 'react'
-import { Box, Flex, Link, Button, Stack } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import { Box, Flex, Link, Stack } from '@chakra-ui/react'
 import Logo from './logo'
 
 interface MenuItem {
-  link?: string;
+  link: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-const MenuItems: React.FC<MenuItem> = ({ children, link }) => (
-  <Link
-    href={link}
-    mr={'36px'}
-    display="block"
-    fontWeight="medium"
-    fontSize="md"
-    _hover={{ color: 'purple.600' }}
-  >
-    {children}
-  </Link>
-)
+const MenuItems: React.FC<MenuItem> = ({ children, link, onClick }) => {
+  const href = link.startsWith('#') ? `/${link}` : link
+  return (
+    <Link
+      as={NextLink}
+      href={href}
+      mr={'36px'}
+      display="block"
+      fontWeight="medium"
+      fontSize="md"
+      _hover={{ color: 'purple.600' }}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  )
+}
 
 const Nav: React.FC = () => {
   const [show, setShow] = React.useState(false)
@@ -72,21 +79,11 @@ const Nav: React.FC = () => {
         direction={['column', 'column', 'row', 'row']}
         gap={['2', '2', '0', '0']}
       >
-        <MenuItems link="#home">Home</MenuItems>
-        <MenuItems link="#about">About</MenuItems>
-        <MenuItems link="#services">Services</MenuItems>
-        <MenuItems link="#gallery">Gallery</MenuItems>
-        <MenuItems link="#blog">Blog</MenuItems>
-        <Link 
-          href="#contact" 
-          mr={['0', '0', '6', '6']} 
-          display="block" 
-          fontWeight="medium" 
-          _hover={{ color: 'purple.600' }}
-          mt={['2', '2', '0', '0']}
-        >
-          Contact
-        </Link>
+        <MenuItems link="/#home" onClick={() => setShow(false)}>Home</MenuItems>
+        <MenuItems link="/#about" onClick={() => setShow(false)}>About</MenuItems>
+        <MenuItems link="/#services" onClick={() => setShow(false)}>Services</MenuItems>
+        <MenuItems link="/projects" onClick={() => setShow(false)}>Portfolio</MenuItems>
+        <MenuItems link="/#contact" onClick={() => setShow(false)}>Contact</MenuItems>
       </Flex>
     </Flex>
   )

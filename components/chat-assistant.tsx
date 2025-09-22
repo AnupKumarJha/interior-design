@@ -28,9 +28,7 @@ const ChatAssistant: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Groq API configuration
-  const GROQ_API_KEY = process.env.NEXT_PUBLIC_GROQ_API_KEY;
-  const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+  // Chat API (server route)
 
 
 
@@ -44,7 +42,7 @@ const ChatAssistant: React.FC = () => {
     setIsTyping(false);
     // Send welcome message for new conversation
     setTimeout(() => {
-      addBotMessage("Hello! I'm your AI interior design assistant from Namaste Design Studios. I'm here to help you create your dream space. What kind of project are you considering?");
+      addBotMessage("Hello! I'm your AI interior design assistant from NamasteDesignStudios. I'm here to help you create your dream space. What kind of project are you considering?");
     }, 500);
   };
 
@@ -66,7 +64,7 @@ const ChatAssistant: React.FC = () => {
     if (isOpen && messages.length === 0) {
       // Send welcome message when chat opens for the first time
       setTimeout(() => {
-        addBotMessage("Hello! I'm your AI interior design assistant from Namaste Design Studios. I'm here to help you create your dream space. What kind of project are you considering?");
+        addBotMessage("Hello! I'm your AI interior design assistant from NamasteDesignStudios. I'm here to help you create your dream space. What kind of project are you considering?");
       }, 500);
     }
   }, [isOpen, messages.length, addBotMessage]);
@@ -83,55 +81,22 @@ const ChatAssistant: React.FC = () => {
 
   const getGroqResponse = async (userMessage: string, conversationHistory: Message[]): Promise<string> => {
     try {
-      // Check if API key is available
-      if (!GROQ_API_KEY) {
-        throw new Error('Groq API key not configured');
-      }
-      // Build conversation context
-      const systemPrompt = `You are an intelligent interior design assistant for Namaste Design Studios. Your role is to:
-
-1. Help potential clients with interior design questions
-2. Qualify leads by understanding their needs, budget, and timeline
-3. Provide helpful information about our services:
-   - Residential Design: Complete home makeovers, room renovations
-   - Commercial Design: Office spaces, retail stores  
-   - E-Design: Virtual design consultations
-4. Guide interested clients to contact us via WhatsApp (7001837559), phone, or contact form
-5. Be friendly, professional, and knowledgeable about interior design trends
-
-Keep responses concise (2-3 sentences max) and always try to understand the client's specific needs.`;
-
-      const messages = [
-        { role: 'system', content: systemPrompt },
-        ...conversationHistory.slice(-6).map(msg => ({
-          role: msg.sender === 'user' ? 'user' : 'assistant',
-          content: msg.text
-        })),
-        { role: 'user', content: userMessage }
-      ];
-
-      const response = await fetch(GROQ_API_URL, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'llama3-70b-8192',
-          messages: messages,
-          max_tokens: 150,
-          temperature: 0.7,
+          history: conversationHistory.slice(-6).map(msg => ({ role: msg.sender === 'user' ? 'user' : 'assistant', content: msg.text })),
+          message: userMessage,
         }),
-      });
+      })
 
       if (!response.ok) {
-        throw new Error(`Groq API error: ${response.status}`);
+        throw new Error(`Chat API error: ${response.status}`)
       }
-
-      const data = await response.json();
-      return data.choices[0]?.message?.content || "I'm here to help with your interior design needs! Could you tell me more about your project?";
+      const data = await response.json()
+      return data.reply || "I'm here to help with your interior design needs! Could you tell me more about your project?";
     } catch (error) {
-      console.error('Groq API error:', error);
+      console.error('Chat API error:', error);
       // Return a simple error message if API fails
       throw new Error('Unable to connect to AI assistant. Please try again.');
     }
