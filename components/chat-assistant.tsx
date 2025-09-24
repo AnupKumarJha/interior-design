@@ -40,10 +40,7 @@ const ChatAssistant: React.FC = () => {
     setMessages([]);
     setInputMessage('');
     setIsTyping(false);
-    // Send welcome message for new conversation
-    setTimeout(() => {
-      addBotMessage("Hello! I'm your AI interior design assistant from NamasteDesignStudios. I'm here to help you create your dream space. What kind of project are you considering?");
-    }, 500);
+    // Welcome message will be handled by useEffect when messages.length becomes 0
   };
 
   const addBotMessage = useCallback((text: string) => {
