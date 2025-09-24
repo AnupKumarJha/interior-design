@@ -104,6 +104,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isCompact = false }) => {
       const templateId = 'template_355itln'; // Replace this with your actual template ID from EmailJS dashboard
       const publicKey = 'ROmkUq835qVWPKFTU'; // You'll need to replace this
 
+      
       const templateParams = {
         from_name: formData.name,
         from_phone: `${formData.countryCode} ${formData.phone}`,
