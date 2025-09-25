@@ -23,7 +23,7 @@ Keep responses concise (2–3 sentences) and friendly.`
     }
 
     const payload = {
-      model: 'llama-3.1-70b-versatile',
+      model: 'llama-3.1-8b-instant',
       messages: [
         { role: 'system', content: systemPrompt },
         ...history,
